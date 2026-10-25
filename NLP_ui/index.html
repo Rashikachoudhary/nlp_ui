@@ -18,6 +18,10 @@ h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15
 h1{font-size:clamp(1.8rem,5vw,2.9rem);max-width:20ch}
 h2{font-size:1.7rem}h3{font-size:1.15rem}
 p{margin:.4em 0 .9em;max-width:68ch}
+.hd{display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.txt{flex:1 1 380px}
+.art{flex:0 1 340px;margin:0 auto}
+.art img{width:150%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
 header{padding:2.2rem 1.2rem 1rem;max-width:1000px;margin:auto}
 .sub{color:var(--mute);max-width:62ch}
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
@@ -71,8 +75,15 @@ th,td{padding:.45rem .6rem;border-bottom:1px solid var(--line);text-align:left}
 </head>
 <body>
 <header>
-<h1>Can deepfake detectors survive the real world?</h1>
-<p class="sub">An interactive guide to the paper “Robustness Analysis of Spatial, Frequency, and Spatial-Frequency Fusion-Based DeepFake Detectors under Adversarial and Real-World Distortions.” <br><strong>Authors:</strong> Rashika, Satyam Tyagi, Mayan Prajapati, Pranjal Sharma, Rachit Gupta.</p>
+<div class="hd">
+  <div class="txt">
+    <h1>Can deepfake detectors survive the real world?</h1>
+    <p class="sub">An interactive guide to the paper “Robustness Analysis of Spatial, Frequency, and Spatial-Frequency Fusion-Based DeepFake Detectors under Adversarial and Real-World Distortions.” <br><strong>Authors:</strong> Rashika, Satyam Tyagi, Mayan Prajapati, Pranjal Sharma, Rachit Gupta.</p>
+  </div>
+  <figure class="art" style="margin:0">
+    <img src="nlp_diagram.png" alt="Deepfake detection illustration" onerror="this.parentNode.style.display='none'">
+  </figure>
+</div>
 </header>
 <nav><div role="tablist" id="tabs"></div></nav>
 <main>
@@ -263,9 +274,7 @@ drawS();
 // $("#insight").textContent=NOTE[met]}
 // drawC();
 // F1 demo
-function demo(){const p=$("#fk").value/100;$("#fkv").textContent=$("#fk").value;
-const f1=2*p/(1+p);$("#fkout").innerHTML=`An all-fake detector gets accuracy <b>${p.toFixed(3)}</b> and F1 <b>${f1.toFixed(3)}</b>, yet balanced accuracy stays at <b>0.500</b>. The more skewed the data, the better it looks, without detecting anything.`}
-$("#fk").oninput=demo;demo();
+
 </script>
 </body>
 </html>
