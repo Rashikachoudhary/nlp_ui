@@ -99,7 +99,8 @@ adversarial attacks and real-world distortions, alone and combined?</div>
 
 <div class="grid">
 <div class="card"><h3>What it is</h3>
-<p>A fair, side-by-side robustness study. It does not propose a new architecture.</p></div>
+<p>A systematic, side-by-side evaluation of the robustness of spatial, frequency-based, and 
+fusion-based DeepFake detectors under adversarial attacks and real-world distortions.</p></div>
 
 <div class="card">
 <h3>Dataset</h3><p>Celeb-DF v2: real and fake celebrity videos. 5 frames are taken from each video.</p></div>
@@ -111,7 +112,7 @@ Adding frequency features to a spatial model does not guarantee better robustnes
 <div class="card"><p><b>1.</b> Spatial and fusion detectors are strong on clean images and under noise.</p>
 <p><b>2.</b> Tiny FGSM and PGD attacks break all three detectors in the white-box setting.</p>
 <p><b>3.</b> JPEG compression is hard: precision stays high, but recall drops, so many fakes are called real.</p>
-<p><b>4.</b> A high F1-score can be misleading on an imbalanced test set (see the Results tab).</p></div>
+<p><b>4.</b> A high F1-score can be misleading on an imbalanced test set.</p></div>
 </section>
 
 <section id="gap">
@@ -161,12 +162,16 @@ scores with the true labels and the AdamW optimizer updates the weights.</p></di
 <div class="card"><h3>Real-world distortions</h3>
 <div class="chips"><span class="chip">JPEG quality 60</span><span class="chip">Gaussian noise σ = 2</span>
     <span class="chip">Gaussian blur σ = 2</span><span class="chip">Resize scale 0.5</span></div>
-<p style="margin-top:.7rem">Compound tests apply these in order, for example PGD → JPEG → Blur → Resize.</p></div>
+<p style="margin-top:.7rem">Compound tests apply these in order, for example PGD → JPEG → Blur → Resize.</p>
+<br>
+<p>“We selected these parameter values as fixed experimental settings to simulate different types of image degradation. 
+ JPEG quality 60 represents lossy compression, 
+Gaussian noise and blur simulate noisy or unclear images, and a resize scale of 0.5 simulates reduced resolution."</p></div>
 </div>
 <div class="card"><h3>How performance is measured</h3>
-<p>Fake is the positive class and the threshold is 0.5. <b>Precision:</b> of the frames called fake, how many really are.<b>
-    Recall:</b> of the real fakes, how many were caught. <b>F1</b> combines both. <b>ROC-AUC</b> shows how well real and fake are separated at any threshold. <b>
-Balanced accuracy</b> = (recall + specificity) / 2, which treats both classes equally.</p></div>
+<p>Fake is the positive class and the threshold is 0.5. <br><b>Precision:</b> of the frames called fake, how many really are.<br><b>
+    Recall:</b> of the real fakes, how many were caught. <br><b>F1</b> combines both. <br><b>ROC-AUC</b> shows how well real and fake are separated at any threshold. <b>
+<br>Balanced accuracy</b> = (recall + specificity) / 2, which treats both classes equally.</p></div>
 </section>
 
 <section id="results">
@@ -195,8 +200,14 @@ Balanced accuracy</b> = (recall + specificity) / 2, which treats both classes eq
 <p class="note" style="margin-top:.7rem">Transfer attacks are made on the spatial detector. They hurt fusion (it shares the EfficientNet-B0 branch) but barely change the frequency detector, which is already weak. JPEG applied after an attack removes much of the attack’s effect.</p></div> -->
 
 <!-- <h3>Conclusion</h3> -->
-<div class="card"><p>Spatial and fusion models do well on clean and noisy images. FGSM and PGD hurt every detector, and JPEG and compound conditions lower performance too. The frequency model is weak in most conditions. No model is best everywhere, and fusion does not always improve robustness.</p>
-<p><b>Future work:</b> repeat with several random seeds, try other datasets, and test different distortion strengths.</p></div>
+<div class="card">The spatial and fusion models demonstrate strong performance on clean and noisy images. However, FGSM and PGD adversarial 
+  attacks reduce the performance of all three detectors. JPEG compression and compound distortions further affect detection accuracy, 
+  highlighting the challenges of maintaining robustness under multiple image degradations. The frequency-based model performs comparatively 
+  weaker in most tested conditions, while the fusion model does not consistently outperform the spatial model. Overall, the comparison shows 
+  that no single model performs best across every condition, and combining spatial and frequency features does not automatically guarantee better robustness.</p>
+  <b>Future work:</b> repeat with several random seeds, try other datasets, and test different distortion strengths.</p><br>
+<b>“Our key finding is that high performance on clean images does not necessarily translate into robustness under real-world distortions and adversarial attacks. Reliable 
+  DeepFake detection therefore requires evaluating not only how accurately a model detects fakes, but also how consistently it performs under challenging conditions.”</b></div>
 </section>
 
 <section id="refs">
